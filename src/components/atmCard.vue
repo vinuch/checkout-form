@@ -77,6 +77,7 @@ export default {
     .atm {
       width: 85%;
       margin: 0 -1.5rem;
+      /* jhkgv */
     }
   }
 </style>
