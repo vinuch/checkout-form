@@ -77,7 +77,6 @@ export default {
     .atm {
       width: 85%;
       margin: 0 -1.5rem;
-      /* jhkgv */
     }
     #card-number {
       font-size: 1.2rem;
