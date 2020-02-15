@@ -7,16 +7,15 @@
     <!-- <input type="number" placeholder="" id="card-number"> -->
     <div class="row">
       <div>
-        <span class="label">name</span>
-        <div class="value" >{{ cardName }}</div>
         <!-- <label for="name">name</label><br>
         <input type="text" name="name" id="card-name" placeholder=""> -->
+        <span class="label">name</span>
+        <div class="value">{{ cardName }}</div>
       </div>
       <div>
         <span class="label">expiration date</span>
         <div class="value">{{ expDate }}</div>
-        <!-- <label for="expiry-date">expiration date</label><br>
-        <input type="date" name="expiry-date" id="card-name"> -->
+
       </div>
     </div>
   </div>
@@ -72,5 +71,12 @@ export default {
     color: #3f4178;
     font-weight: bold;
     font-size: 1.3rem;
+  }
+
+  @media (max-width: 400px) {
+    .atm {
+      width: 85%;
+      margin: 0 -1.5rem;
+    }
   }
 </style>

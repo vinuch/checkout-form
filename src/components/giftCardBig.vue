@@ -21,8 +21,22 @@ export default {
     margin: 0 3rem 3rem;
 }
 
+
 .card-bg img {
   width: 16rem;
   margin: 5% 25%;
+}
+
+@media (max-width: 400px) {
+  .card-bg {
+    width: 70%;
+    height: 10rem;
+    margin: 0 3rem 3rem;
+  }
+
+  .card-bg img{
+    width: 9rem;
+    margin: 7% 13%;
+  }
 }
 </style>

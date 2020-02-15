@@ -18,10 +18,20 @@
       </div>
 <!--     :class="{selected: isActive}" -->
       <div class="form">
-        <atmCard
-          :cardNumber="cardInfo.cardNumber"
-          :cardName="cardInfo.cardHolderName"
-          :expDate="cardInfo.expDate"/>
+        <div class="flipper">
+            <transition name="front">
+            <atmCard v-if="!showCard"
+              :cardNumber="cardInfo.cardNumber"
+              :cardName="cardInfo.cardHolderName"
+              :expDate="cardInfo.expDate"/>
+          </transition>
+
+          <transition name="back">
+            <atmCardBack v-if="showCard"
+              :cvv="cardInfo.cvv"/>
+          </transition>
+        </div>
+
         <form action="">
           <div>
             <label  for="card-number">cardholder number</label><br>
@@ -34,11 +44,14 @@
           <div class="row">
             <div>
               <label for="expiry-date">exp date</label><br>
-              <input v-model="cardInfo.expDate" type="text" name="expiry-date" id="exp-date">
+              <input  v-model="cardInfo.expDate"
+              type="text" name="expiry-date" id="exp-date">
             </div>
             <div>
               <label for="cvv">cvv</label><br>
-              <input type="number" name="cvv" id="cvv">
+              <input @focus="showCard = true"
+                @blur="showCard = false" type="number" name="cvv" id="cvv"
+                v-model="cardInfo.cvv">
             </div>
             <button id="next-btn">Next</button>
           </div>
@@ -54,6 +67,7 @@ import giftCardBig from '@/components/giftCardBig.vue';
 import giftsHeader from '@/components/giftsHeader.vue';
 import giftCardSmall from '@/components/giftCardSmall.vue';
 import atmCard from '@/components/atmCard.vue';
+import atmCardBack from '@/components/atmCardBack.vue';
 import dog1 from '../assets/images/pug-dog1.jpg';
 import dog2 from '../assets/images/pug-dog2.jpg';
 import dog3 from '../assets/images/pug-dog3.jpg';
@@ -89,6 +103,7 @@ export default {
         cvv: '',
       },
       bigCardImg: dog1,
+      showCard: false,
     };
   },
   components: {
@@ -96,6 +111,7 @@ export default {
     giftCardSmall,
     giftsHeader,
     atmCard,
+    atmCardBack,
   },
 
   methods: {
@@ -114,6 +130,9 @@ export default {
     changeImg(url) {
       this.bigCardImg = url;
     },
+    showBack() {
+      this.showCard = true;
+    },
   },
 };
 </script>
@@ -123,17 +142,19 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
 }
   #app {
     background-color: #dadef1;
-    height: 90vh;
+    /* height: 90vh; */
     padding: 4rem 0;
     margin: 0;
   }
   .container {
     display: flex;
-    height: 80vh;
+    /* height: 80vh; */
     justify-content: center;
+    padding-bottom: 2rem;
   }
   .gift {
     flex-basis: 40%;
@@ -151,7 +172,7 @@ body {
     position: relative;
   }
   .form::before {
-content: " ";
+    content: " ";
     border-bottom: 84.7vh solid #99a8cf;
     border-left: 116px solid transparent;
     border-right: 0px solid transparent;
@@ -159,7 +180,7 @@ content: " ";
     width: 0;
     position: absolute;
     left: -115px;
-    top: 11px;
+    top: 8px;
     border-top-right-radius: 0px;
     display: block;
   }
@@ -206,4 +227,70 @@ content: " ";
     text-transform: uppercase;
     font-weight: bold;
   }
+
+  .flipper {
+    height: 18rem;
+    position: relative;
+  }
+  .front-leave-active {
+    animation: rotate 0.6s ease;
+  }
+
+  .front-enter-to {
+    display: none;
+    animation: rotate-reverse 0.6s ease;
+    animation-delay: 0.2s;
+  }
+
+  .back-enter-active {
+    animation: rotate-reverse 0.6s ease;
+    animation-delay: 0.6s;
+    visibility: hidden;
+  }
+  .back-leave-active {
+    animation: rotate 0.6s ease ;
+  }
+
+
+  @keyframes rotate {
+    0% {
+      transform: rotateY(0deg)
+    }
+    100% {
+      transform: rotateY(-90deg);
+      visibility: visible;
+    }
+  }
+
+  @keyframes rotate-reverse {
+        0% {
+      transform: rotateY(-90deg)
+    }
+    100% {
+      transform: rotateY(0deg);
+      visibility: visible;
+    }
+  }
+
+  @media (max-width: 400px){
+    .container {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .gift {
+    background-color: #fff;
+    padding: 3rem 2rem;
+    border-radius: 20px;
+    /* margin-right: -2rem; */
+    width: 75%;
+    margin: 0 1rem 1rem;
+    }
+
+    .form {
+      border-radius: 20px 20px 20px 20px;
+    }
+  }
+
 </style>

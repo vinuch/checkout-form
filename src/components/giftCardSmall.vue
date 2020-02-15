@@ -48,4 +48,14 @@ export default {
   .options {
     display: flex;
   }
+
+  @media (max-width: 400px) {
+    .card-sm {
+      margin: 0 .3rem;
+    }
+
+    .card-sm img {
+      width: 4.6rem;
+    }
+  }
 </style>
