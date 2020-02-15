@@ -49,7 +49,7 @@ export default {
     display: flex;
   }
 
-  @media (max-width: 400px) {
+  @media (max-width: 500px) {
     .card-sm {
       margin: 0 .3rem;
     }

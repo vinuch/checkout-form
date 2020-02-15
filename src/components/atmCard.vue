@@ -73,7 +73,7 @@ export default {
     font-size: 1.3rem;
   }
 
-  @media (max-width: 400px) {
+  @media (max-width: 500px) {
     .atm {
       width: 85%;
       margin: 0 -1.5rem;

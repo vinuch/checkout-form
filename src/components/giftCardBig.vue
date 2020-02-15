@@ -27,7 +27,7 @@ export default {
   margin: 5% 25%;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 500px) {
   .card-bg {
     width: 70%;
     height: 10rem;

@@ -272,7 +272,7 @@ body {
     }
   }
 
-  @media (max-width: 400px){
+  @media (max-width: 500px){
     .container {
       display: flex;
       justify-content: center;
